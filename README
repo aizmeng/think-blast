@@ -7,3 +7,5 @@ Numpy
 OpenBCI-Python (and dependencies)
 Scipy
 Scikit-learn
+openbci_lsl
+LivestreamLayer
