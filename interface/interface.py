@@ -7,4 +7,5 @@ from scipy import linalg
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
 import eegtools
 import pylsl
+import openbci_lsl
 
