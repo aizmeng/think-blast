@@ -1,24 +1,34 @@
 import Tkinter as tk
 
-def change_color(x,obj):
-    basec=canvas.itemcget(obj,"fill")
-    currentc=canvas.itemcget(obj,"fill")
-    nextc="white" if currentc==basec else basec
-    canvas.itemconfig(obj, fill=nextc)
-    root.after(1/x,change_color(x,obj))
+def changecolor():
+    make()
 
+def make():
+    global freq1,f1
+    f1=int(freq1.get())
+    createid1()
+    root.after(1/f1, unmake)
+
+def unmake():
+    global f1
+    canvas.delete("all")
+    root.after(1/f1, make)   
+
+def createid1():
+    global id1
+    id1=canvas.create_rectangle(0,0,200,200,fill='red')
+def restartt():
+    canvas.delete("all")
 if __name__ == "__main__":
     root=tk.Tk()
-    canvas=tk.Canvas(root, width=350, height=350)
+    canvas=tk.Canvas(root, width=200, height=200)
     canvas.pack()
-    id1=canvas.create_rectangle(50,50,150,150,fill='red')
-    id2=canvas.create_rectangle(150,150,300,300,fill='blue')
-
-    tk.Label(root, text="Frequency Hz 1").grid(row=0)
-    tk.Label(root, text="Frequency Hz 2").grid(row=1)
-
-    e1 = tk.Entry(root)
-    e2 = tk.Entry(root)
+    global time1,time2
+    freq1 = tk.Entry(root)
+    freq1.pack()
     b1=tk.Button(root, text="start",
-                 command=[change_color(e1.get(),id1),change_color(e2.get(),id2)]).grid(row=3,column=0, stick=W, pady =4)    
+                 command=changecolor).pack()
+    b2=tk.Button(root,text="restart",command=restartt).pack()
+    b3=tk.Button(root,text="quit",command=root.destroy).pack()
+
     root.mainloop()
